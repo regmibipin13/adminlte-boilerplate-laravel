@@ -6,8 +6,8 @@
       <p class="login-box-msg">You forgot your password? Here you can easily retrieve a new password.</p>
         @include('auth.partials.__error')
         @if(session('status'))
-        <div class="alert alert-{{ $session }}">
-          {{ $session }}
+        <div class="alert alert-success">
+          {{ session('status') }}
         </div>
         @endif
       <form action="{{ route('password.email') }}" method="POST" class="mb-2">
