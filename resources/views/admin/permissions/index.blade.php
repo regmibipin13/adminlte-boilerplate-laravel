@@ -6,47 +6,55 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">{{ __('Permissions') }}</h3>
-
                     </div>
                     <div class="card-body">
+                        <div class="row mb-2">
+                            <div class="col-md-2">
+                                <a href="{{ route('permissions.create') }}" class="btn btn-success">Add New</a>
+                            </div>
+                            <div class="col-md-7">
+
+                            </div>
+                            <div class="col-md-3">
+                                <form action="{{ route('permissions.index') }}" method="get">
+                                    <input type="search" name="name" value="{{ request()->name }}" placeholder="Search" class="form-control">
+                                </form>
+                            </div>
+                        </div>
                         <table class="table table-bordered table-hover">
                             <thead>
-                                <div class="row mb-2">
-                                    <div class="col-md-2">
-                                        <a href="" class="btn btn-success">Add New</a>
-                                    </div>
-                                    <div class="col-md-7">
-
-                                    </div>
-                                    <div class="col-md-3">
-                                        <form action="{{ route('permissions.index') }}" method="GET">
-                                            <input type="search" name="search" value="{{ old('search') }}" placeholder="Search" class="form-control">
-                                        </form>
-                                    </div>
-                                </div>
-                            </thead>
-                            <thead>
                               <tr>
-                                <th>
-                                    <input type="checkbox" class="form-check-group" name="all_ids" id="all_ids">
-                                </th>
                                 <th>#ID</th>
                                 <th>Name</th>
                                 <th>Actions</th>
                               </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td><input type="checkbox" class="form-check-group" name="column_id" id="column_id"></td>
-                                    <td>1</td>
-                                    <td>access_permissions</td>
-                                    <td>
-                                        <a href="" class="btn btn-primary btn-sm">Edit</a>
-                                        <a href="" class="btn btn-danger btn-sm">Delete</a>
-                                    </td>
-                                </tr>
+                                @if(count($permissions) > 0)
+                                    @foreach($permissions as $permission)
+                                    <tr>
+                                        <td>{{ $permission->id }}</td>
+                                        <td>{{ $permission->name }}</td>
+                                        <td>
+                                            <a href="{{ route('permissions.edit',$permission->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                                            <a href="#" class="btn btn-danger btn-sm delete-button" onclick="document.getElementById('delete-form').submit();">Delete</a>
+                                            <form action="{{ route('permissions.destroy',$permission->id) }}" method="POST" class="delete-form">
+                                                @csrf
+                                                @method('DELETE')
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                @else
+                                    <tr>
+                                        <td colspan="4" class="text-center">No Data available</td>
+                                    </tr>
+                                @endif
                             </tbody>
                         </table>
+                    </div>
+                    <div class="card-footer">
+                        {{ $permissions->appends(Request::all())->links("pagination::bootstrap-4") }}
                     </div>
                 </div>
             </div>

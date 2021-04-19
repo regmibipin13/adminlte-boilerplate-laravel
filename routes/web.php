@@ -19,9 +19,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/admin/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 
-Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->group(function(){
+Route::middleware(['auth'])->prefix('admin')->namespace('App\Http\Controllers\Admin')->group(function(){
 
     Route::resource('permissions','PermissionsController');
 

@@ -34,7 +34,7 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
-                    <a href="#" class="nav-link active">
+                    <a href="{{ route('dashboard') }}" class="nav-link active">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                         Dashboard
@@ -46,12 +46,12 @@
                         <i class="nav-icon fas fa-users"></i>
                         <p>
                         User Management
-                        <i class="right fas fa-angle-left"></i>
+                            <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ route('permissions.index') }}" class="nav-link">
                                 <i class="fas fa-drum-steelpan nav-icon"></i>
                                 <p>Permissions</p>
                             </a>

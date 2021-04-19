@@ -1898,12 +1898,17 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
 var app = new Vue({
   el: '#app'
 });
+$('#flash-overlay-modal').modal();
 $('#all_ids').click(function () {
   if ($(this).is(":checked")) {
     $('#column_id').prop('checked', true);
   } else {
     $('#column_id').prop('checked', false);
   }
+});
+$('.delete-button').click(function (event) {
+  event.preventDefault();
+  $('.delete-form').submit();
 });
 
 /***/ }),

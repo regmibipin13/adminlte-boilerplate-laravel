@@ -13,12 +13,15 @@
         @include('admin.partials.__sidebar')
 
     <div class="content-wrapper">
+        <div class="container-fluid pt-2">
+            @include('flash::message')
+        </div>
         @yield('content')
     </div>
 
         @include('admin.partials.__footer')
     </div>
 
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ mix('js/app.js') }}"></script>
 </body>
 </html>

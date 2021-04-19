@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use EloquentBuilder;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 
@@ -13,9 +14,9 @@ class PermissionsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $permissions = Permission::all();
+        $permissions = EloquentBuilder::to(Permission::class, $request->all())->paginate(20);
         return view('admin.permissions.index',compact('permissions'));
     }
 
@@ -26,7 +27,7 @@ class PermissionsController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.permissions.create');
     }
 
     /**
@@ -37,7 +38,12 @@ class PermissionsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $sanitized = $request->validate([
+            'name' => ['required','unique:permissions'],
+        ]);
+        Permission::create($sanitized);
+        flash('Permission Created Successfully')->success();
+        return redirect()->to('/admin/permissions');
     }
 
     /**
@@ -57,9 +63,9 @@ class PermissionsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Permission $permission)
     {
-        //
+        return view('admin.permissions.edit',compact('permission'));
     }
 
     /**
@@ -69,9 +75,14 @@ class PermissionsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Permission $permission)
     {
-        //
+        $sanitized = $request->validate([
+            'name' => ['required','sometimes'],
+        ]);
+        $permission->update($sanitized);
+        flash('Permission Updated Successfully')->success();
+        return redirect()->to('/admin/permissions');
     }
 
     /**
@@ -80,8 +91,10 @@ class PermissionsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Permission $permission)
     {
-        //
+        $permission->delete();
+        flash('Permission Deleted Successfully')->success();
+        return redirect()->back();
     }
 }
