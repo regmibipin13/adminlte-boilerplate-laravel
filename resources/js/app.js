@@ -22,3 +22,6 @@ $('.delete-button').click(function(event){
     event.preventDefault();
     $('.delete-form').submit();
 });
+$(document).ready(function() {
+    $('.select2').select2();
+});

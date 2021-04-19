@@ -24,5 +24,7 @@ Route::get('/admin/dashboard', [App\Http\Controllers\HomeController::class, 'ind
 Route::middleware(['auth'])->prefix('admin')->namespace('App\Http\Controllers\Admin')->group(function(){
 
     Route::resource('permissions','PermissionsController');
+    Route::resource('roles','RolesController');
+    Route::resource('users','UsersController');
 
 });

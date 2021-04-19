@@ -57,13 +57,13 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ route('roles.index') }}" class="nav-link">
                                 <i class="fas fa-user-tag nav-icon"></i>
                                 <p>Roles</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ route('users.index') }}" class="nav-link">
                                 <i class="far fa-user nav-icon"></i>
                                 <p>Users</p>
                             </a>

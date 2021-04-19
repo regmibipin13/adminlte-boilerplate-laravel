@@ -5,40 +5,43 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">{{ __('Permissions') }}</h3>
+                        <h3 class="card-title">{{ __('Users') }}</h3>
                     </div>
                     <div class="card-body">
-                        <div class="row mb-2">
-                            <div class="col-md-2">
-                                <a href="{{ route('permissions.create') }}" class="btn btn-success">Add New</a>
-                            </div>
-                            <div class="col-md-7">
+                        <form action="{{ route('users.index') }}" method="get">
+                            <div class="row mb-2">
+                                <div class="col-md-2">
+                                    <a href="{{ route('users.create') }}" class="btn btn-success">Add New</a>
+                                </div>
+                                <div class="col-md-7">
 
+                                </div>
+                                <div class="col-md-3">
+                                        <input type="search" name="search" value="{{ request()->search }}" placeholder="Search" class="form-control">
+                                    </form>
+                                </div>
                             </div>
-                            <div class="col-md-3">
-                                <form action="{{ route('permissions.index') }}" method="get">
-                                    <input type="search" name="name" value="{{ request()->name }}" placeholder="Search" class="form-control">
-                                </form>
-                            </div>
-                        </div>
+                        </form>
                         <table class="table table-bordered table-hover">
                             <thead>
                               <tr>
                                 <th>#ID</th>
                                 <th>Name</th>
+                                <th>Email</th>
                                 <th>Actions</th>
                               </tr>
                             </thead>
                             <tbody>
-                                @if(count($permissions) > 0)
-                                    @foreach($permissions as $permission)
+                                @if(count($users) > 0)
+                                    @foreach($users as $user)
                                     <tr>
-                                        <td>{{ $permission->id }}</td>
-                                        <td>{{ $permission->name }}</td>
+                                        <td>{{ $user->id }}</td>
+                                        <td>{{ $user->name }}</td>
+                                        <td>{{ $user->email }}</td>
                                         <td>
-                                            <a href="{{ route('permissions.edit',$permission->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                                            <a href="{{ route('users.edit',$user->id) }}" class="btn btn-primary btn-sm">Edit</a>
                                             <a href="#" class="btn btn-danger btn-sm delete-button" onclick="document.getElementByClassName('delete-form').submit();">Delete</a>
-                                            <form action="{{ route('permissions.destroy',$permission->id) }}" method="POST" class="delete-form">
+                                            <form action="{{ route('users.destroy',$user->id) }}" method="POST" class="delete-form">
                                                 @csrf
                                                 @method('DELETE')
                                             </form>
@@ -54,7 +57,7 @@
                         </table>
                     </div>
                     <div class="card-footer">
-                        {{ $permissions->appends(Request::all())->links("pagination::bootstrap-4") }}
+                        {{ $users->appends(Request::all())->links("pagination::bootstrap-4") }}
                     </div>
                 </div>
             </div>

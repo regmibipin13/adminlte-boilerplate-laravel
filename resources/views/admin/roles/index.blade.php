@@ -5,22 +5,23 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">{{ __('Permissions') }}</h3>
+                        <h3 class="card-title">{{ __('Roles') }}</h3>
                     </div>
                     <div class="card-body">
-                        <div class="row mb-2">
-                            <div class="col-md-2">
-                                <a href="{{ route('permissions.create') }}" class="btn btn-success">Add New</a>
-                            </div>
-                            <div class="col-md-7">
+                        <form action="{{ route('roles.index') }}" method="get">
+                            <div class="row mb-2">
+                                <div class="col-md-2">
+                                    <a href="{{ route('roles.create') }}" class="btn btn-success">Add New</a>
+                                </div>
+                                <div class="col-md-7">
 
+                                </div>
+                                <div class="col-md-3">
+                                        <input type="search" name="name" value="{{ request()->name }}" placeholder="Search" class="form-control">
+                                    </form>
+                                </div>
                             </div>
-                            <div class="col-md-3">
-                                <form action="{{ route('permissions.index') }}" method="get">
-                                    <input type="search" name="name" value="{{ request()->name }}" placeholder="Search" class="form-control">
-                                </form>
-                            </div>
-                        </div>
+                        </form>
                         <table class="table table-bordered table-hover">
                             <thead>
                               <tr>
@@ -30,15 +31,15 @@
                               </tr>
                             </thead>
                             <tbody>
-                                @if(count($permissions) > 0)
-                                    @foreach($permissions as $permission)
+                                @if(count($roles) > 0)
+                                    @foreach($roles as $role)
                                     <tr>
-                                        <td>{{ $permission->id }}</td>
-                                        <td>{{ $permission->name }}</td>
+                                        <td>{{ $role->id }}</td>
+                                        <td>{{ $role->name }}</td>
                                         <td>
-                                            <a href="{{ route('permissions.edit',$permission->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                                            <a href="{{ route('roles.edit',$role->id) }}" class="btn btn-primary btn-sm">Edit</a>
                                             <a href="#" class="btn btn-danger btn-sm delete-button" onclick="document.getElementByClassName('delete-form').submit();">Delete</a>
-                                            <form action="{{ route('permissions.destroy',$permission->id) }}" method="POST" class="delete-form">
+                                            <form action="{{ route('roles.destroy',$role->id) }}" method="POST" class="delete-form">
                                                 @csrf
                                                 @method('DELETE')
                                             </form>
@@ -54,7 +55,7 @@
                         </table>
                     </div>
                     <div class="card-footer">
-                        {{ $permissions->appends(Request::all())->links("pagination::bootstrap-4") }}
+                        {{ $roles->appends(Request::all())->links("pagination::bootstrap-4") }}
                     </div>
                 </div>
             </div>
