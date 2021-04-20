@@ -27,4 +27,8 @@ Route::middleware(['auth'])->prefix('admin')->namespace('App\Http\Controllers\Ad
     Route::resource('roles','RolesController');
     Route::resource('users','UsersController');
 
+    Route::post('settings/delete','SettingsController@delete')->name('settings.delete');
+    Route::post('settings/update','SettingsController@updateAll')->name('settings.update.all');
+    Route::resource('settings','SettingsController');
+
 });

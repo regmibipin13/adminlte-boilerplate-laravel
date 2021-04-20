@@ -14,6 +14,7 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.2",
         "mohammad-fouladgar/eloquent-builder": "^3.1",
+        "plank/laravel-mediable": "^5.0",
         "pragmarx/countries": "^0.7.2",
         "spatie/laravel-permission": "^4.0"
     },
@@ -31,7 +32,10 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "files":[
+            "app/Helpers/helper.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
